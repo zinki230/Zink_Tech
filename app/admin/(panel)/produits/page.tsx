@@ -1,0 +1,25 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, CircleAlert, Package, Plus } from "lucide-react";
+import { getAdminProducts } from "@/lib/admin-data";
+import { updateProductAvailability } from "@/app/admin/actions";
+
+export const metadata: Metadata = { title: "Produits | Administration Zink Tech", robots: { index: false, follow: false } };
+const priceFormat = (value: string) => `${new Intl.NumberFormat("fr-FR").format(Number(value))} FCFA`;
+
+type Props = { searchParams: Promise<{ cree?: string; misajour?: string }> };
+export default async function AdminProductsPage({ searchParams }: Props) {
+  const [data, query] = await Promise.all([getAdminProducts(), searchParams]);
+  return <div>
+    <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="text-xs font-semibold uppercase tracking-[.18em] text-[#2872bf]">CATALOGUE</p><h1 className="mt-2 text-3xl font-semibold tracking-[-.05em] text-[#142451]">Produits</h1><p className="mt-2 text-sm text-[#737e91]">Gérez vos fiches, vos prix et les niveaux de stock.</p></div><Link href="/admin/produits/nouveau" className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#173986] px-4 text-xs font-semibold text-white transition hover:bg-[#10245d]"><Plus size={15}/> Ajouter un produit</Link></div>
+    {query.cree && <p role="status" className="mt-5 rounded-xl border border-green-200 bg-green-50 p-3 text-sm text-green-800">Le produit a été ajouté.</p>}
+    {query.misajour && <p role="status" className="mt-5 rounded-xl border border-green-200 bg-green-50 p-3 text-sm text-green-800">La fiche produit a été mise à jour.</p>}
+    {!data.connected && <div className="mt-6 flex gap-3 rounded-xl border border-[#f0d99b] bg-[#fff8e4] p-4 text-sm leading-6 text-[#715418]"><CircleAlert size={18} className="mt-0.5 shrink-0"/><p>{data.error} Les fiches de démonstration ne sont pas enregistrées dans le site.</p></div>}
+    <section className="mt-6 overflow-hidden rounded-2xl border border-[#e7eaf0] bg-white">
+      <div className="flex items-center justify-between border-b border-[#edf0f4] px-5 py-4"><div><h2 className="text-sm font-semibold">Catalogue complet</h2><p className="mt-1 text-xs text-[#8993a3]">{data.connected ? `${data.products.length} produit${data.products.length === 1 ? "" : "s"}` : "Aucune donnée chargée"}</p></div><Package size={19} className="text-[#6382ae]"/></div>
+      {!data.connected || !data.products.length ? <div className="px-5 py-14 text-center"><p className="text-sm font-medium text-[#566176]">{data.connected ? "Le catalogue est encore vide" : "Le catalogue sera affiché après connexion à la base"}</p><p className="mt-2 text-xs text-[#8b94a3]">Créez vos marques et catégories avant d’ajouter vos premières fiches.</p><Link href="/admin/catalogue" className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-[#2363b5]">Préparer le catalogue <ArrowRight size={14}/></Link></div> :
+        <div className="overflow-x-auto"><table className="w-full min-w-[760px] text-left text-xs"><thead className="bg-[#fafbfd] text-[10px] uppercase tracking-wide text-[#939cac]"><tr><th className="px-5 py-3">Produit</th><th className="px-4 py-3">Catégorie</th><th className="px-4 py-3">Prix</th><th className="px-4 py-3">Stock</th><th className="px-5 py-3 text-right">Actions</th></tr></thead><tbody>{data.products.map((product) => <tr key={product.id} className="border-t border-[#f0f2f6]"><td className="px-5 py-3"><div className="flex items-center gap-3">{product.image ? <Image src={product.image} alt="" width={44} height={44} unoptimized className="h-11 w-11 rounded-lg bg-[#f4f6fa] object-cover"/> : <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#f1f4fa] text-[#6c82a5]"><Package size={18}/></span>}<div><Link href={`/admin/produits/${product.id}`} className="font-semibold text-[#2c3c59] hover:text-[#2363b5]">{product.name}</Link><p className="mt-1 text-[10px] text-[#8b94a3]">{product.brand} · {product.slug}</p></div></div></td><td className="px-4 py-3 text-[#657086]">{product.category}</td><td className="px-4 py-3 font-medium text-[#43516a]">{priceFormat(product.price)}</td><td className="px-4 py-3"><form action={updateProductAvailability} className="flex items-center gap-2"><input type="hidden" name="id" value={product.id}/><input type="hidden" name="stockQuantity" value={product.stockQuantity}/><input type="hidden" name="inStock" value={String(!product.inStock)}/><button className={`rounded-full px-2.5 py-1 text-[10px] font-medium ${product.inStock ? "bg-green-50 text-green-700" : "bg-slate-100 text-slate-600"}`}>{product.inStock ? `En stock · ${product.stockQuantity}` : "Indisponible"}</button></form></td><td className="px-5 py-3 text-right"><Link href={`/admin/produits/${product.id}`} className="rounded-lg border border-[#dfe4ed] px-3 py-2 font-medium text-[#536078] hover:bg-[#f7f9fc]">Modifier</Link></td></tr>)}</tbody></table></div>}
+    </section>
+  </div>;
+}

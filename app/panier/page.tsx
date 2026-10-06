@@ -1,0 +1,7 @@
+import Link from "next/link";
+import { ArrowRight, MessageCircle, ShoppingBag } from "lucide-react";
+import { WhatsAppButton } from "@/components/whatsapp-button";
+
+export default function CartPage() {
+  return <div className="min-h-[60vh] bg-[#faf9f6] px-5 py-14 sm:py-20"><div className="mx-auto max-w-xl rounded-[28px] border border-[#e8e7e1] bg-white px-7 py-10 text-center sm:px-12 sm:py-14"><div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#eff3e9] text-[#34705e]"><ShoppingBag size={28}/></div><h1 className="mt-6 text-3xl font-semibold tracking-[-.045em]">Votre sélection vous attend.</h1><p className="mt-3 text-sm leading-6 text-[#68716a]">Les commandes se finalisent directement avec notre équipe sur WhatsApp. Ouvrez la fiche d’un produit pour poser vos questions et confirmer le prix et le stock.</p><Link href="/ordinateurs-portables" className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#173f36] px-6 text-sm font-semibold text-white transition hover:bg-[#285c4c]">Voir les ordinateurs <ArrowRight size={16}/></Link><div className="my-7 h-px bg-[#ecece6]"/><WhatsAppButton className="w-full rounded-full">Demander conseil à l’équipe</WhatsAppButton><p className="mt-4 flex items-center justify-center gap-1.5 text-[11px] text-[#818980]"><MessageCircle size={13}/> Prix, disponibilité et livraison confirmés avec vous.</p></div></div>;
+}
