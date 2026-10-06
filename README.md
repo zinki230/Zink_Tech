@@ -63,6 +63,16 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## Production on Vercel
+
+The project uses PostgreSQL through Prisma. Set `DATABASE_URL` in the Vercel project to a reachable production PostgreSQL connection string, then apply the checked-in migrations with:
+
+```bash
+npm run db:deploy
+```
+
+Run this command with the production `DATABASE_URL` available in the environment. Do not use the local `.env.local` URL for Vercel: `localhost` points to the build/runtime container, not the developer's computer. New production schema changes should be committed as Prisma migrations and deployed with `npm run db:deploy`.
+
 ## 📁 Project Structure
 
 ```

@@ -36,8 +36,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# prisma
-prisma/migrations
-
 # one-time local administrator credential store
 /data/admin-credentials.json
