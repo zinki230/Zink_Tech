@@ -22,16 +22,8 @@ const { fallbackCatalogue } = catalogueModule.exports;
 const prisma = new PrismaClient();
 
 async function seedCatalogue() {
-  await prisma.$transaction(async (transaction) => {
-    const previousProducts = await transaction.product.findMany({ select: { id: true } });
-    const previousProductIds = previousProducts.map(({ id }) => id);
-
-    if (previousProductIds.length) {
-      await transaction.cartItem.deleteMany({ where: { productId: { in: previousProductIds } } });
-      await transaction.wishlistItem.deleteMany({ where: { productId: { in: previousProductIds } } });
-      await transaction.review.deleteMany({ where: { productId: { in: previousProductIds } } });
-      await transaction.product.deleteMany({ where: { id: { in: previousProductIds } } });
-    }
+  const seeded = await prisma.$transaction(async (transaction) => {
+    if (await transaction.product.count()) return false;
 
     const brandIds = new Map();
     for (const name of new Set(fallbackCatalogue.map((product) => product.brand))) {
@@ -84,9 +76,15 @@ async function seedCatalogue() {
         },
       });
     }
+
+    return true;
   });
 
-  console.log(`${fallbackCatalogue.length} produits synchronisés depuis le catalogue du site.`);
+  if (seeded) {
+    console.log(`${fallbackCatalogue.length} produits ajoutés au catalogue PostgreSQL.`);
+  } else {
+    console.log("Import initial ignoré : la base contient déjà des produits.");
+  }
 }
 
 seedCatalogue()
