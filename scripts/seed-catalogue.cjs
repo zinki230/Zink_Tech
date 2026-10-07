@@ -22,8 +22,7 @@ const { fallbackCatalogue } = catalogueModule.exports;
 const prisma = new PrismaClient();
 
 async function seedCatalogue() {
-  const seeded = await prisma.$transaction(async (transaction) => {
-    if (await transaction.product.count()) return false;
+  const result = await prisma.$transaction(async (transaction) => {
 
     const brandIds = new Map();
     for (const name of new Set(fallbackCatalogue.map((product) => product.brand))) {
@@ -49,42 +48,64 @@ async function seedCatalogue() {
       categoryIds.set(product.categorySlug, category.id);
     }
 
+    let productsCreated = 0;
+    let imagesCreated = 0;
     for (const product of fallbackCatalogue) {
-      await transaction.product.create({
-        data: {
-          name: product.name,
-          slug: product.slug,
-          description: product.description,
-          shortDescription: product.shortDescription,
-          price: product.price,
-          inStock: product.inStock,
-          stockQuantity: 1,
-          featured: product.featured,
-          brandId: brandIds.get(product.brand),
-          categoryId: categoryIds.get(product.categorySlug),
-          images: {
-            create: [{ url: product.image, alt: `${product.brand} ${product.name}`, order: 0 }],
+      let existing = await transaction.product.findUnique({ where: { slug: product.slug }, select: { id: true } });
+      if (!existing) {
+        existing = await transaction.product.create({
+          data: {
+            name: product.name,
+            slug: product.slug,
+            description: product.description,
+            shortDescription: product.shortDescription,
+            price: product.price,
+            inStock: product.inStock,
+            stockQuantity: 1,
+            featured: product.featured,
+            brandId: brandIds.get(product.brand),
+            categoryId: categoryIds.get(product.categorySlug),
+            specifications: {
+              create: product.specifications.map((specification, order) => ({
+                key: specification.name,
+                value: specification.value,
+                group: specification.group,
+                order,
+              })),
+            },
           },
-          specifications: {
-            create: product.specifications.map((specification, order) => ({
-              key: specification.name,
-              value: specification.value,
-              group: specification.group,
-              order,
-            })),
+          select: { id: true },
+        });
+        productsCreated += 1;
+      }
+
+      const urls = [product.image, ...(product.galleryImages || [])];
+      for (const [order, url] of [...new Set(urls)].entries()) {
+        const imageExists = await transaction.productImage.findFirst({
+          where: { productId: existing.id, url },
+          select: { id: true },
+        });
+        if (imageExists) continue;
+        const highestOrder = await transaction.productImage.aggregate({
+          where: { productId: existing.id },
+          _max: { order: true },
+        });
+        await transaction.productImage.create({
+          data: {
+            productId: existing.id,
+            url,
+            alt: `${product.brand} ${product.name} — vue ${order + 1}`,
+            order: Math.max(order, (highestOrder._max.order ?? -1) + 1),
           },
-        },
-      });
+        });
+        imagesCreated += 1;
+      }
     }
 
-    return true;
+    return { productsCreated, imagesCreated };
   });
 
-  if (seeded) {
-    console.log(`${fallbackCatalogue.length} produits ajoutés au catalogue PostgreSQL.`);
-  } else {
-    console.log("Import initial ignoré : la base contient déjà des produits.");
-  }
+  console.log(`Synchronisation PostgreSQL terminée : ${result.productsCreated} produits ajoutés, ${result.imagesCreated} images ajoutées.`);
 }
 
 seedCatalogue()

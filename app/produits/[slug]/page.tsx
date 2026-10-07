@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, BadgeCheck, MessageCircle, PackageCheck, ShieldCheck, Truck } from "lucide-react";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { getStoreProductBySlug } from "@/lib/catalogue";
+import { ProductImageGallery } from "@/components/product-image-gallery";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -57,12 +57,12 @@ export default async function ProductDetailPage({ params }: Props) {
       <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8 sm:py-16">
         <Link href={categoryHref} className="inline-flex items-center gap-2 text-sm text-[#305786] hover:text-[#10245d]"><ArrowLeft size={16}/> {categoryLabel}</Link>
         <div className="mt-8 grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-16">
-          <div className="relative flex min-h-[340px] items-center justify-center overflow-hidden rounded-[28px] bg-[#edf3fb] sm:min-h-[470px]">
-            {record?.images[0] ? <Image src={record.images[0]} alt={`${productName} — Zink Tech Cameroun`} fill unoptimized priority className="object-contain p-8" sizes="(max-width: 1024px) 100vw, 50vw"/> : <>
+          <div>
+            {record?.images[0] ? <ProductImageGallery images={record.images} productName={productName} /> : <div className="relative flex min-h-[340px] items-center justify-center overflow-hidden rounded-[28px] bg-[#edf3fb] sm:min-h-[470px]">
               <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full border border-[#d9e4f2]"/><div className="absolute -bottom-16 -left-10 h-72 w-72 rounded-full border border-[#d9e4f2]"/>
               <div className="relative z-10 flex h-44 w-44 items-center justify-center rounded-full bg-white shadow-[0_20px_60px_rgba(20,40,80,.08)]"><span className="text-5xl font-semibold tracking-[-.08em] text-[#184ca5]">{brand.slice(0,2).toUpperCase()}</span></div>
-            </>}
-            {!record?.images[0] && <span className="absolute bottom-4 rounded-full bg-white/85 px-3 py-1 text-[10px] text-[#667187]">Visuel d’illustration</span>}
+              <span className="absolute bottom-4 rounded-full bg-white/85 px-3 py-1 text-[10px] text-[#667187]">Visuel d’illustration</span>
+            </div>}
           </div>
           <div className="flex flex-col justify-center">
             <span className="text-xs font-semibold uppercase tracking-[.2em] text-[#1768b7]">{record?.category || "PRODUIT"} · ZINK TECH CAMEROUN</span>
