@@ -17,57 +17,6 @@ export const metadata: Metadata = {
 };
 
 export default async function LaptopsPage() {
-  const products = [
-    {
-      id: "1", slug: "hp-probook-450-g10", name: "ProBook 450 G10", brand: "HP",
-      price: 749900, originalPrice: 849900, image: "/products/hp-probook-450.jpg",
-      rating: 4.8, reviewCount: 24, inStock: true,
-      shortDescription: "Intel Core i5-1335U, 16GB RAM, 512GB SSD, 15.6\" FHD",
-    },
-    {
-      id: "2", slug: "lenovo-thinkpad-e14-gen-5", name: "ThinkPad E14 Gen 5", brand: "Lenovo",
-      price: 899000, image: "/products/lenovo-thinkpad-e14.jpg",
-      rating: 4.9, reviewCount: 18, inStock: true,
-      shortDescription: "Intel Core i7-1355U, 16GB RAM, 512GB SSD, 14\" FHD",
-    },
-    {
-      id: "3", slug: "dell-latitude-3420", name: "Latitude 3420", brand: "Dell",
-      price: 675000, originalPrice: 750000, image: "/products/dell-latitude-3420.jpg",
-      rating: 4.7, reviewCount: 31, inStock: true,
-      shortDescription: "Intel Core i5-1135G7, 8GB RAM, 256GB SSD, 14\" FHD",
-    },
-    {
-      id: "4", slug: "macbook-air-m2", name: "MacBook Air M2", brand: "Apple",
-      price: 1450000, image: "/products/macbook-air-m2.jpg",
-      rating: 4.9, reviewCount: 56, inStock: true,
-      shortDescription: "Apple M2, 8GB RAM, 256GB SSD, 13.6\" Liquid Retina",
-    },
-    {
-      id: "5", slug: "asus-vivobook-15", name: "VivoBook 15 OLED", brand: "Asus",
-      price: 589000, image: "/products/asus-vivobook-15.jpg",
-      rating: 4.6, reviewCount: 42, inStock: true,
-      shortDescription: "Intel Core i5-13500H, 8GB RAM, 512GB SSD, 15.6\" OLED",
-    },
-    {
-      id: "6", slug: "hp-elitebook-840-g9", name: "EliteBook 840 G9", brand: "HP",
-      price: 1250000, originalPrice: 1350000, image: "/products/hp-elitebook-840.jpg",
-      rating: 4.9, reviewCount: 15, inStock: true,
-      shortDescription: "Intel Core i7-1265U, 16GB RAM, 512GB SSD, 14\" FHD",
-    },
-    {
-      id: "7", slug: "lenovo-ideapad-3", name: "IdeaPad 3 15", brand: "Lenovo",
-      price: 425000, image: "/products/lenovo-ideapad-3.jpg",
-      rating: 4.4, reviewCount: 67, inStock: true,
-      shortDescription: "AMD Ryzen 5 5500U, 8GB RAM, 256GB SSD, 15.6\" FHD",
-    },
-    {
-      id: "8", slug: "dell-xps-13-plus", name: "XPS 13 Plus", brand: "Dell",
-      price: 1899000, image: "/products/dell-xps-13-plus.jpg",
-      rating: 4.8, reviewCount: 28, inStock: true,
-      shortDescription: "Intel Core i7-1360P, 16GB RAM, 512GB SSD, 13.4\" FHD+",
-    },
-  ];
-
   const categories = [
     { name: "Tous", count: 700, active: true },
     { name: "Étudiant", count: 245 },
@@ -95,7 +44,7 @@ export default async function LaptopsPage() {
   ];
 
   const liveProducts = await getStoreProducts({ categorySlug: "ordinateurs-portables" });
-  const displayProducts = liveProducts ?? products;
+  const displayProducts = liveProducts ?? [];
 
   return (
     <div className="min-h-screen bg-[#faf9f6] text-[#17201e]">

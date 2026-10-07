@@ -17,57 +17,6 @@ export const metadata: Metadata = {
 };
 
 export default async function SmartphonesPage() {
-  const products = [
-    {
-      id: "1", slug: "iphone-15-pro", name: "iPhone 15 Pro", brand: "Apple",
-      price: 1299000, image: "/products/iphone-15-pro.jpg",
-      rating: 4.9, reviewCount: 142, inStock: true,
-      shortDescription: "A17 Pro, 256GB, Titane Noir, iOS 17",
-    },
-    {
-      id: "2", slug: "samsung-galaxy-s24-ultra", name: "Galaxy S24 Ultra", brand: "Samsung",
-      price: 1450000, image: "/products/samsung-s24-ultra.jpg",
-      rating: 4.8, reviewCount: 98, inStock: true,
-      shortDescription: "Snapdragon 8 Gen 3, 256GB, Titane Gris",
-    },
-    {
-      id: "3", slug: "xiaomi-13t-pro", name: "13T Pro", brand: "Xiaomi",
-      price: 549000, originalPrice: 649000, image: "/products/xiaomi-13t-pro.jpg",
-      rating: 4.7, reviewCount: 156, inStock: true,
-      shortDescription: "Dimensity 9200+, 12GB RAM, 256GB, 144Hz",
-    },
-    {
-      id: "4", slug: "tecno-phantom-x2-pro", name: "Phantom X2 Pro", brand: "Tecno",
-      price: 389000, image: "/products/tecno-phantom-x2-pro.jpg",
-      rating: 4.5, reviewCount: 203, inStock: true,
-      shortDescription: "Dimensity 9000, 12GB RAM, 256GB, Retractable Camera",
-    },
-    {
-      id: "5", slug: "samsung-galaxy-a55", name: "Galaxy A55 5G", brand: "Samsung",
-      price: 289900, originalPrice: 329900, image: "/products/samsung-a55.jpg",
-      rating: 4.6, reviewCount: 187, inStock: true,
-      shortDescription: "Exynos 1480, 8GB RAM, 256GB, 120Hz Super AMOLED",
-    },
-    {
-      id: "6", slug: "infinix-note-40-pro", name: "Note 40 Pro", brand: "Infinix",
-      price: 189900, image: "/products/infinix-note-40-pro.jpg",
-      rating: 4.4, reviewCount: 312, inStock: true,
-      shortDescription: "Dimensity 7020, 8GB RAM, 256GB, 108MP Camera",
-    },
-    {
-      id: "7", slug: "google-pixel-8", name: "Pixel 8", brand: "Google",
-      price: 799000, image: "/products/google-pixel-8.jpg",
-      rating: 4.7, reviewCount: 89, inStock: true,
-      shortDescription: "Tensor G3, 8GB RAM, 128GB, AI Photo Editing",
-    },
-    {
-      id: "8", slug: "honor-magic-6-pro", name: "Magic 6 Pro", brand: "Honor",
-      price: 945000, image: "/products/honor-magic-6-pro.jpg",
-      rating: 4.6, reviewCount: 67, inStock: true,
-      shortDescription: "Snapdragon 8 Gen 3, 12GB RAM, 512GB",
-    },
-  ];
-
   const brands = [
     { name: "Apple", count: 45 },
     { name: "Samsung", count: 156 },
@@ -88,7 +37,7 @@ export default async function SmartphonesPage() {
   ];
 
   const liveProducts = await getStoreProducts({ categorySlug: "smartphones" });
-  const displayProducts = liveProducts ?? products;
+  const displayProducts = liveProducts ?? [];
 
   return (
     <div className="min-h-screen bg-[#faf9f6] text-[#17201e]">

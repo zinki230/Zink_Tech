@@ -2,6 +2,7 @@ import "server-only";
 
 import { prisma } from "@/lib/prisma";
 import { isDatabaseConfigured } from "@/lib/admin-data";
+import { getFallbackProductBySlug, getFallbackProducts } from "@/lib/fallback-catalogue";
 
 export type StoreProduct = {
   id: string;
@@ -42,7 +43,7 @@ function formatProduct(product: {
 }
 
 export async function getStoreProducts(options: { categorySlug?: string; featured?: boolean; take?: number } = {}) {
-  if (!isDatabaseConfigured()) return null;
+  if (!isDatabaseConfigured()) return getFallbackProducts(options);
   try {
     const products = await prisma.product.findMany({
       where: {
@@ -56,12 +57,12 @@ export async function getStoreProducts(options: { categorySlug?: string; feature
     });
     return products.map(formatProduct);
   } catch {
-    return null;
+    return getFallbackProducts(options);
   }
 }
 
 export async function getStoreProductBySlug(slug: string) {
-  if (!isDatabaseConfigured()) return null;
+  if (!isDatabaseConfigured()) return getFallbackProductBySlug(slug);
   try {
     const product = await prisma.product.findUnique({
       where: { slug },
@@ -72,7 +73,7 @@ export async function getStoreProductBySlug(slug: string) {
         specifications: { orderBy: { order: "asc" } },
       },
     });
-    if (!product) return null;
+    if (!product) return getFallbackProductBySlug(slug);
     return {
       ...formatProduct(product),
       description: product.description || "",
@@ -84,7 +85,7 @@ export async function getStoreProductBySlug(slug: string) {
       images: product.images.map((image) => image.url),
     };
   } catch {
-    return null;
+    return getFallbackProductBySlug(slug);
   }
 }
 

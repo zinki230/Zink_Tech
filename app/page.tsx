@@ -11,13 +11,6 @@ import { HeroSection } from "@/components/hero-section";
 import { ScrollReveal, StaggerWrapper, StaggerItem, AnimatedCounter } from "@/lib/animations";
 import { getStoreProducts } from "@/lib/catalogue";
 
-const products = [
-  { id: "1", slug: "hp-probook-450-g10", name: "ProBook 450 G10", brand: "HP", price: 749900, originalPrice: 849900, image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=85", rating: 4.8, reviewCount: 24, inStock: true, shortDescription: "Core i5 · 16 Go RAM · SSD 512 Go" },
-  { id: "2", slug: "lenovo-thinkpad-e14-gen-5", name: "ThinkPad E14 Gen 5", brand: "Lenovo", price: 899000, image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=900&q=85", rating: 4.9, reviewCount: 18, inStock: true, shortDescription: "Core i7 · 16 Go RAM · SSD 512 Go" },
-  { id: "3", slug: "dell-latitude-3420", name: "Latitude 3420", brand: "Dell", price: 675000, originalPrice: 750000, image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=900&q=85", rating: 4.7, reviewCount: 31, inStock: true, shortDescription: "Core i5 · 8 Go RAM · SSD 256 Go" },
-  { id: "4", slug: "macbook-air-m2", name: "MacBook Air M2", brand: "Apple", price: 1450000, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=900&q=85", rating: 4.9, reviewCount: 56, inStock: true, shortDescription: "Apple M2 · 8 Go RAM · SSD 256 Go" },
-];
-
 const categories = [
   { name: "Ordinateurs", text: "Pour travailler, créer et jouer", href: "/ordinateurs-portables", icon: Laptop, number: "01" },
   { name: "Smartphones", text: "Votre quotidien, en mieux", href: "/smartphones", icon: Smartphone, number: "02" },
@@ -39,7 +32,7 @@ const testimonials = [
 
 export default async function HomePage() {
   const liveProducts = await getStoreProducts({ featured: true, take: 4 });
-  const displayProducts = liveProducts ?? products;
+  const displayProducts = liveProducts ?? [];
 
   return (
     <div className="overflow-hidden bg-[#faf9f6] text-[#17201e]">
