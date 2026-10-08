@@ -15,6 +15,7 @@ export type FallbackProduct = {
   specifications: { name: string; value: string; group: string }[];
   priceIsEstimate?: boolean;
   updateExisting?: boolean;
+  replaceExistingImages?: boolean;
 };
 
 export const fallbackCatalogue: FallbackProduct[] = [
@@ -611,11 +612,51 @@ const catalogueImagePools: Record<string, string[]> = {
     "https://media.rs-online.com/Y1871709-01.jpg",
     "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202404/02/00128638804279____1__1200x1200.jpg",
   ],
+  desktop: [
+    "https://lntsufin.com/storage/mediafiles/catalog/live/16851-1767/original/16851-1767_image_0.jpg",
+    "https://apollo.olx.in/v1/files/lciqmxiys7ls2-IN/image",
+    "https://img.kilimall.com/c/public/store/8207/goods/image/101341856.png",
+    "https://ecab1b4452.cbaul-cdnwnd.com/4ec0d55c146f83a3b4a779a7b55be63d/200000009-d142fd1432/700/pcbasica.jpeg?ph=ecab1b4452",
+    "https://siplah.blibli.com/data/images/STPC-0011-00027/a96279fb-7c66-4d48-bf3a-4c169d580750.jpg",
+    "https://s3.omarket.kz/main/9be/kjz77dzq6rc31ujze95u5j8tlsqdvnrp/01.jpg",
+  ],
+  cleaning: [
+    "https://static.rapidonline.com/catalogueimages/product/87/01/s87-0112p01wj.jpg",
+    "https://image.made-in-china.com/318f0j00YtWGCjaPRicQ/computer-foam-cleaner-mp4.webp",
+    "https://static-01.daraz.lk/p/4090a3da9246faf1488116937433b287.jpg",
+    "https://s.alicdn.com/%40sc04/kf/H23a32503fe7349b9968da093f2e9ae46Y/Kaidisen-Cleaning-Expert-Foam-Cleaning-Agent-650ml-Laptop-PC-Keyboard-Screen-Cleaning-Brush-Universal-Handboss.png",
+    "https://maltazon.com/304499-large_default/Tracer-Foam-Cleaner-Spray-400ml-Universal-Cleaning-Foam-for-Office-Equipment-Computers-Keyboards-and-Surfaces.jpg",
+    "https://prod.isg.bruneau.media/asset/aHR0cHM6Ly9icnVuZWF1LnNpbXBsZXdvcmtzcGFjZS5uZXQvZmlsZS9wdWJBc3NldEJhc2UvS2doNV9jaFVyS2tJQ2YzSkNRdXFUN2otbWxDdHJnQlFvcU1hT3I1UjMzYnZoamFuUzdFLzAvcy85ODg2M0EuanBn?height=2000&quality=85&width=2000",
+  ],
+  bag: [
+    "https://www.mirrormirror.lk/cdn/shop/files/O1CN01QSq2ma1cImAUxEOlv__2211339673578-0-cib.jpg?v=1747383204",
+    "https://c1.neweggimages.com/productimage/nb640/BUGFD24071904V6TU6B.jpg",
+    "https://i5.walmartimages.com/asr/755eaf57-4b08-40a3-b040-826e45f5a458.be5bc3e2186422fbf1e9544c07686678.jpeg?odnBg=FFFFFF&odnHeight=768&odnWidth=768",
+    "https://image.made-in-china.com/202f0j00hGMqLEjDHyuV/Durable-Waterproof-Oxford-Ultra-Thin-Portable-Backpack.webp",
+    "https://mtechleb.com/cdn/shop/files/backpack-for-laptop-bp116__40663.jpg?v=1775632928&width=1280",
+    "https://www.bigw.com.au/medias/sys_master/images/images/h38/hbd/133739526062110.jpg",
+  ],
+  television: [
+    "https://www.salextra.com.bd/images/thumbs/004/0042083_toshiba-43-inch-hd-android-smart-tv-43v35mp_600.jpeg",
+    "https://cdn.bdstall.com/product-image/445171_600X600.jpg",
+    "https://buyabans.com/cdn-cgi/imagedelivery/OgVIyabXh1YHxwM0lBwqgA/product/15519/dmWYDFVksbwazfPahfNikIM3BMpbsZQmGzCsqH19.webp/public",
+    "https://slon-cdn.zenegal.store/products/8563/800-toshiba-32-inch-led-smart-tv-thtv32v35mp-17449640971004.jfif",
+    "https://imgs.pontofrio.com.br/1554088626/1xg.jpg",
+    "https://cdn.bdstall.com/product-image/445171_600X600.jpg?view=side",
+  ],
+  ups: [
+    "https://img.drz.lazcdn.com/static/np/p/fee907dd0fe8e0419835c0907354075b.jpg_720x720q80.jpg",
+    "https://www.koblenz.com.mx/cdn/shop/files/75223.png?v=1755117082&width=1200",
+    "https://www.intex.in/cdn/shop/files/ups-topmenu_1024x1024.jpg?v=1671602002",
+    "https://tiimg.tistatic.com/fp/1/008/074/easy-to-install-230-v-single-phase-one-line-intex-computer-ups-967.jpg",
+    "https://cdn.allmarket.ge/2405/21/72/21/1e963fdbe02b47338ad7fbae0da21415/26738-261908.jpg",
+    "https://m.media-amazon.com/images/I/61QC8KQWXtL.jpg",
+  ],
 };
 
 type BulkProductInput = {
   slug: string; name: string; brand: string; cost: number; details: string;
-  pool: keyof typeof catalogueImagePools; equipment?: boolean; starting?: boolean;
+  pool: keyof typeof catalogueImagePools; equipment?: boolean; starting?: boolean; replaceImages?: boolean;
 };
 
 const bulkProductInputs: BulkProductInput[] = [
@@ -661,14 +702,14 @@ const bulkProductInputs: BulkProductInput[] = [
   { slug: "lenovo-yoga-300e-4-go-64-go-tactile", name: "Lenovo Yoga 300e", brand: "Lenovo", cost: 50000, details: "Stockage: 64 Go|Mémoire: 4 Go|Écran: 11,6 pouces tactile|Format: Tactile et pliable", pool: "lenovo" },
 
   { slug: "msi-gaming-i7-7e-24-go-256-go-1-to-6-go", name: "MSI Gaming Core i7 7e génération", brand: "MSI", cost: 275000, details: "Processeur: Intel Core i7, 7e génération|Stockage: 256 Go + 1 To|Mémoire: 24 Go|Carte graphique: 6 Go dédié, modèle à confirmer|Écran: 15,6 pouces", pool: "msi" },
-  { slug: "desktop-complet", name: "Ordinateur de bureau complet", brand: "Zink Tech", cost: 47000, details: "Prix: À partir de 62 000 FCFA", pool: "equipment", equipment: true, starting: true },
+  { slug: "desktop-complet", name: "Ordinateur de bureau complet", brand: "Zink Tech", cost: 47000, details: "Prix: À partir de 62 000 FCFA", pool: "desktop", equipment: true, starting: true, replaceImages: true },
   { slug: "support-laptop", name: "Support pour ordinateur portable", brand: "Accessoires", cost: 3000, details: "Type: Support pour laptop", pool: "stand", equipment: true },
   { slug: "disque-dur-512-go", name: "Disque dur 512 Go", brand: "Stockage", cost: 30000, details: "Capacité: 512 Go|Type: Disque dur, interface à confirmer", pool: "hdd", equipment: true },
-  { slug: "mousse-nettoyage-informatique", name: "Mousse de nettoyage informatique", brand: "Entretien", cost: 3000, details: "Type: Mousse de nettoyage", pool: "equipment", equipment: true },
-  { slug: "sac-ordinateur-portable", name: "Sac pour ordinateur portable", brand: "Accessoires", cost: 4000, details: "Type: Sac pour laptop", pool: "equipment", equipment: true },
+  { slug: "mousse-nettoyage-informatique", name: "Mousse de nettoyage informatique", brand: "Entretien", cost: 3000, details: "Type: Mousse de nettoyage", pool: "cleaning", equipment: true, replaceImages: true },
+  { slug: "sac-ordinateur-portable", name: "Sac pour ordinateur portable", brand: "Accessoires", cost: 4000, details: "Type: Sac pour laptop", pool: "bag", equipment: true, replaceImages: true },
   { slug: "cle-usb", name: "Clé USB", brand: "Stockage", cost: 2500, details: "Prix: À partir de 17 500 FCFA", pool: "usb", equipment: true, starting: true },
-  { slug: "televiseur-smart-toshiba-32-pouces", name: "Téléviseur Smart Toshiba 32 pouces", brand: "Toshiba", cost: 65000, details: "Écran: 32 pouces|Fonction: Smart TV", pool: "equipment", equipment: true },
-  { slug: "onduleur-e-assure-725va", name: "Onduleur e-Assure 725 VA", brand: "e-Assure", cost: 25000, details: "Puissance: 725 VA", pool: "equipment", equipment: true },
+  { slug: "televiseur-smart-toshiba-32-pouces", name: "Téléviseur Smart Toshiba 32 pouces", brand: "Toshiba", cost: 65000, details: "Écran: 32 pouces|Fonction: Smart TV", pool: "television", equipment: true, replaceImages: true },
+  { slug: "onduleur-e-assure-725va", name: "Onduleur e-Assure 725 VA", brand: "e-Assure", cost: 25000, details: "Puissance: 725 VA", pool: "ups", equipment: true, replaceImages: true },
   { slug: "projecteur", name: "Projecteur", brand: "Équipement audiovisuel", cost: 70000, details: "Prix: À partir de 85 000 FCFA|Location: Possible, tarif à confirmer", pool: "projector", equipment: true, starting: true },
   { slug: "upgrade-ssd-256-go-vers-512-go", name: "Mise à niveau SSD 256 Go vers 512 Go", brand: "Stockage", cost: 25000, details: "Mise à niveau: SSD de 256 Go vers 512 Go", pool: "storage", equipment: true },
   { slug: "upgrade-ssd-256-go-vers-1-to", name: "Mise à niveau SSD 256 Go vers 1 To", brand: "Stockage", cost: 45000, details: "Mise à niveau: SSD de 256 Go vers 1 To", pool: "storage", equipment: true },
@@ -705,6 +746,7 @@ const bulkProducts: FallbackProduct[] = bulkProductInputs.map((input, index) => 
     description: `${input.name} proposé au prix de vente de ${price.toLocaleString("fr-FR")} FCFA. ${input.details.replaceAll("|", ". ")}. Les informations de configuration sont celles du catalogue fourni et restent à confirmer avec la référence de l’appareil. Les photos sont des images d’illustration de la gamme et ne représentent pas nécessairement l’unité vendue.`,
     specifications,
     ...(input.starting ? { priceIsEstimate: true } : {}),
+    ...(input.replaceImages ? { replaceExistingImages: true } : {}),
   };
 });
 

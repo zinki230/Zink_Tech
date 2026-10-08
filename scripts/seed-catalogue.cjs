@@ -98,6 +98,10 @@ async function seedCatalogue() {
         });
       }
 
+      if (existing && product.replaceExistingImages) {
+        await transaction.productImage.deleteMany({ where: { productId: existing.id } });
+      }
+
       const urls = [product.image, ...(product.galleryImages || [])];
       for (const [order, url] of [...new Set(urls)].entries()) {
         const imageExists = await transaction.productImage.findFirst({
