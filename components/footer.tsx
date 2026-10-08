@@ -3,9 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { MapPin, Phone, Mail, ArrowUpRight, ArrowRight, MessageCircle, BadgeCheck, ChevronRight } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowUpRight, ArrowRight, BadgeCheck, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -51,8 +52,9 @@ export function Footer() {
                   />
                   <button
                     type="submit"
-                    className="bg-[#54b948] px-5 py-3 text-sm font-semibold text-[#17392f] transition hover:bg-white"
+                    className="inline-flex items-center gap-2 bg-[#54b948] px-5 py-3 text-sm font-semibold text-[#17392f] transition hover:bg-white"
                   >
+                    <WhatsAppIcon className="h-4 w-4" />
                     S&apos;inscrire
                   </button>
                 </form>
@@ -60,7 +62,6 @@ export function Footer() {
                   size="sm"
                   className="rounded-full border border-white/20 bg-white/10 text-white hover:bg-white/20"
                 >
-                  <MessageCircle size={15} />
                   WhatsApp
                 </WhatsAppButton>
               </div>
@@ -145,7 +146,6 @@ export function Footer() {
             </li>
           </ul>
           <WhatsAppButton size="sm" className="mt-5 rounded-full bg-[#54b948] text-[#17392f] transition hover:bg-white">
-            <MessageCircle size={15} />
             Écrire sur WhatsApp
           </WhatsAppButton>
         </div>

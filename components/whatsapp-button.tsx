@@ -1,7 +1,7 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { generateWhatsAppUrl } from "@/lib/utils";
 
 interface WhatsAppButtonProps {
@@ -33,7 +33,7 @@ export function WhatsAppButton({
         className={`fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-lg transition-transform hover:scale-110 whatsapp-float-btn ${className || ""}`}
         aria-label="Contacter sur WhatsApp"
       >
-        <MessageCircle className="h-7 w-7" />
+        <WhatsAppIcon className="h-7 w-7" />
       </button>
     );
   }
@@ -45,7 +45,7 @@ export function WhatsAppButton({
       onClick={handleClick}
       className={className}
     >
-      <MessageCircle className="h-4 w-4" />
+      <WhatsAppIcon className="h-4 w-4" />
       {children || "Commander sur WhatsApp"}
     </Button>
   );

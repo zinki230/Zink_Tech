@@ -4,12 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import {
-  Search, ShoppingBag, Menu, X, Phone, MapPin, MessageCircle,
+  Search, ShoppingBag, Menu, X, Phone, MapPin,
   Laptop, Smartphone, Tablet, Package, Building2, ChevronRight, ChevronDown,
   BadgeCheck, Star, ArrowRight, Award,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 
 const navItems = [
   { label: "Ordinateurs", href: "/ordinateurs-portables", icon: Laptop },
@@ -127,7 +128,7 @@ export function Header() {
             rel="noreferrer"
             className="hidden h-10 items-center gap-2 rounded-full bg-[#289844] px-4 text-xs font-semibold text-white transition hover:bg-[#207c3b] sm:flex"
           >
-            <MessageCircle size={15} /> Nous écrire
+            <WhatsAppIcon className="h-[15px] w-[15px]" /> Nous écrire
           </a>
 
           <button
