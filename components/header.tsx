@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import {
   Search, ShoppingBag, Menu, X, Phone, MapPin, MessageCircle,
-  Laptop, Smartphone, Building2, ChevronRight, ChevronDown,
+  Laptop, Smartphone, Tablet, Package, Building2, ChevronRight, ChevronDown,
   BadgeCheck, Star, ArrowRight, Award,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,7 +13,8 @@ import { WhatsAppButton } from "@/components/whatsapp-button";
 
 const navItems = [
   { label: "Ordinateurs", href: "/ordinateurs-portables", icon: Laptop },
-  { label: "Accessoires", href: "/equipements", icon: Laptop },
+  { label: "Tablettes", href: "/tablettes", icon: Tablet },
+  { label: "Équipements et accessoires", href: "/equipements", icon: Package },
   { label: "Smartphones", href: "/smartphones", icon: Smartphone },
   { label: "Marques", href: "/marques", icon: Award },
   { label: "Entreprises", href: "/entreprises", icon: Building2 },
@@ -210,6 +211,8 @@ export function Header() {
                 {([
                   ["Ordinateurs portables", "/ordinateurs-portables", Laptop],
                   ["Smartphones", "/smartphones", Smartphone],
+                  ["Tablettes", "/tablettes", Tablet],
+                  ["Équipements et accessoires", "/equipements", Package],
                   ["Nos marques", "/marques", Award],
                   ["Solutions entreprises", "/entreprises", Building2],
                   ["Ma demande", "/panier", ShoppingBag],

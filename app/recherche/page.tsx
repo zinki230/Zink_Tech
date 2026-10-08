@@ -7,6 +7,8 @@ export const metadata: Metadata = { title: "Rechercher un produit", description:
 const catalog = [
   { name: "Ordinateurs portables", text: "HP, Dell, Lenovo, Apple et plus", href: "/ordinateurs-portables", terms: "ordinateur portable laptop pc hp dell lenovo apple macbook" },
   { name: "Smartphones", text: "iPhone, Samsung, Xiaomi, Tecno et Infinix", href: "/smartphones", terms: "smartphone téléphone iphone samsung xiaomi tecno infinix" },
+  { name: "Tablettes", text: "iPad et autres tablettes disponibles", href: "/tablettes", terms: "tablette ipad apple ipad" },
+  { name: "Équipements et accessoires", text: "Accessoires informatiques et mises à niveau", href: "/equipements", terms: "équipement accessoire support sac usb stockage mémoire ram ssd" },
   { name: "Solutions informatiques pour entreprises", text: "Équipement, conseil et accompagnement professionnel", href: "/entreprises", terms: "entreprise professionnel informatique devis equipement" },
   { name: "Marques disponibles", text: "Découvrez les marques proposées par Zink Tech", href: "/marques", terms: "marque asus acer msi google" },
 ];

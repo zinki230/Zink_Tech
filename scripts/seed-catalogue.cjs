@@ -60,6 +60,8 @@ async function seedCatalogue() {
             description: product.description,
             shortDescription: product.shortDescription,
             price: product.price,
+            brandId: brandIds.get(product.brand),
+            categoryId: categoryIds.get(product.categorySlug),
             inStock: product.inStock,
             stockQuantity: 1,
             featured: product.featured,
@@ -85,6 +87,8 @@ async function seedCatalogue() {
             description: product.description,
             shortDescription: product.shortDescription,
             price: product.price,
+            brandId: brandIds.get(product.brand),
+            categoryId: categoryIds.get(product.categorySlug),
             specifications: {
               deleteMany: {},
               create: product.specifications.map((specification, order) => ({

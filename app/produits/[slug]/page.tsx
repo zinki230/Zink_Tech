@@ -30,8 +30,8 @@ export default async function ProductDetailPage({ params }: Props) {
   const productName = record ? `${record.brand} ${record.name}` : prettify(slug);
   const brand = record?.brand || productName.split(" ")[0];
   const isPhone = /iphone|galaxy|xiaomi|tecno|infinix|smartphone/i.test(slug) || record?.categorySlug === "smartphones";
-  const categoryHref = record?.categorySlug === "smartphones" || isPhone ? "/smartphones" : record?.categorySlug === "equipements" ? "/equipements" : "/ordinateurs-portables";
-  const categoryLabel = isPhone ? "Retour aux smartphones" : "Retour aux ordinateurs";
+  const categoryHref = record?.categorySlug === "smartphones" || isPhone ? "/smartphones" : record?.categorySlug === "tablettes" ? "/tablettes" : record?.categorySlug === "equipements" ? "/equipements" : "/ordinateurs-portables";
+  const categoryLabel = isPhone ? "Retour aux smartphones" : record?.categorySlug === "tablettes" ? "Retour aux tablettes" : record?.categorySlug === "equipements" ? "Retour aux équipements" : "Retour aux ordinateurs";
   const whatsappMessage = `Bonjour Zink Tech, je suis intéressé(e) par ${productName}.${record?.price ? ` Prix affiché : ${new Intl.NumberFormat("fr-FR").format(record.price)} FCFA.` : ""} Pouvez-vous me confirmer la disponibilité et les options de livraison ?`;
   const productSchema = record ? {
     "@context": "https://schema.org",

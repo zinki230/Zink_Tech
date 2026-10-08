@@ -100,6 +100,7 @@ export function Footer() {
           </h2>
           <ul className="mt-5 space-y-3 text-sm text-white/75">
             <li><Link className="transition hover:text-white hover:translate-x-1 inline-flex items-center gap-1" href="/ordinateurs-portables">Ordinateurs portables <ChevronRight size={10} /></Link></li>
+            <li><Link className="transition hover:text-white hover:translate-x-1 inline-flex items-center gap-1" href="/tablettes">Tablettes <ChevronRight size={10} /></Link></li>
             <li><Link className="transition hover:text-white hover:translate-x-1 inline-flex items-center gap-1" href="/equipements">Équipements et accessoires <ChevronRight size={10} /></Link></li>
             <li><Link className="transition hover:text-white hover:translate-x-1 inline-flex items-center gap-1" href="/smartphones">Smartphones <ChevronRight size={10} /></Link></li>
             <li><Link className="transition hover:text-white hover:translate-x-1 inline-flex items-center gap-1" href="/marques">Nos marques <ChevronRight size={10} /></Link></li>
