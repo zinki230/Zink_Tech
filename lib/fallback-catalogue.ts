@@ -480,6 +480,37 @@ export const fallbackCatalogue: FallbackProduct[] = [
       { name: "Prix", value: "200 000 FCFA", group: "Prix" },
     ],
   },
+  {
+    id: "fallback-msi-stealth-16-ai-studio-ultra-9-4070",
+    slug: "msi-stealth-16-ai-studio-core-ultra-9-64-go-1-to-rtx-4070",
+    name: "MSI Stealth 16 AI Studio Core Ultra 9 · RTX 4070 · 64 Go",
+    brand: "MSI",
+    price: 1200000,
+    image: "https://asset.msi.com/resize/image/global/product/product_1704418370c2611fbb729332a141f12c92c4f5cddf.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png",
+    galleryImages: [
+      "https://storage-asset.msi.com/global/picture/product/product_17044183664153b286a85bcefa5b3923a0619786bc.webp",
+      "https://storage-asset.msi.com/global/picture/product/product_17132580835144b264692ba09b1ec32b814334b983.webp",
+      "https://storage-asset.msi.com/global/picture/product/product_1713258083ef732224bec17e8674a7f91c82de88dd.webp",
+      "https://storage-asset.msi.com/global/picture/product/product_1699348506ce0701d2790fc8ed98505ae31ea6aa25.webp",
+      "https://storage-asset.msi.com/global/picture/product/product_17132580851d9e2bad2c96d44e0968d3467801d50b.webp",
+    ],
+    inStock: true,
+    featured: false,
+    category: "Ordinateurs portables",
+    categorySlug: "ordinateurs-portables",
+    shortDescription: "Core Ultra 9 185H · RTX 4070 8 Go · 64 Go DDR5 · SSD NVMe 1 To · QHD+ 240 Hz",
+    description: "MSI Stealth 16 AI Studio avec configuration annoncée : Intel Core Ultra 9 185H, NVIDIA GeForce RTX 4070 Laptop 8 Go GDDR6, 64 Go DDR5 et SSD NVMe 1 To. Écran 16 pouces QHD+ (2560 × 1600) à 240 Hz et couverture 100 % DCI-P3 annoncés. Châssis aluminium/magnésium et poids d’environ 1,99 kg. Prix indiqué : 1 200 000 FCFA. Les configurations peuvent varier selon la référence régionale; les images de la galerie illustrent le modèle et ne documentent pas nécessairement la configuration exacte de l’appareil vendu.",
+    specifications: [
+      { name: "Processeur", value: "Intel Core Ultra 9 185H", group: "Performance" },
+      { name: "Carte graphique", value: "NVIDIA GeForce RTX 4070 Laptop, 8 Go GDDR6", group: "Performance" },
+      { name: "Mémoire", value: "64 Go DDR5 annoncés", group: "Performance" },
+      { name: "Stockage", value: "SSD NVMe 1 To annoncé", group: "Stockage" },
+      { name: "Écran", value: "16 pouces QHD+ (2560 × 1600), 240 Hz, 100 % DCI-P3 annoncés", group: "Affichage" },
+      { name: "Châssis", value: "Aluminium/magnésium annoncé", group: "Conception" },
+      { name: "Poids", value: "Environ 1,99 kg", group: "Conception" },
+      { name: "Prix", value: "1 200 000 FCFA", group: "Prix" },
+    ],
+  },
 ];
 
 export function getFallbackProducts(options: { categorySlug?: string; featured?: boolean; take?: number } = {}) {
