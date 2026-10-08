@@ -13,6 +13,7 @@ import { WhatsAppButton } from "@/components/whatsapp-button";
 
 const navItems = [
   { label: "Ordinateurs", href: "/ordinateurs-portables", icon: Laptop },
+  { label: "Accessoires", href: "/equipements", icon: Laptop },
   { label: "Smartphones", href: "/smartphones", icon: Smartphone },
   { label: "Marques", href: "/marques", icon: Award },
   { label: "Entreprises", href: "/entreprises", icon: Building2 },

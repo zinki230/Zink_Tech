@@ -14,6 +14,7 @@ export type FallbackProduct = {
   description: string;
   specifications: { name: string; value: string; group: string }[];
   priceIsEstimate?: boolean;
+  updateExisting?: boolean;
 };
 
 export const fallbackCatalogue: FallbackProduct[] = [
@@ -452,7 +453,7 @@ export const fallbackCatalogue: FallbackProduct[] = [
     slug: "dell-latitude-5580-satan-2-i7-16-go-512-go-ssd",
     name: "Dell Latitude 5580 Workstation « Satan 2 »",
     brand: "Dell",
-    price: 200000,
+    price: 195000,
     image: "https://static.webx.pk/files/78721/Images/5580-1-78721-2208201-230924104748300.jpg",
     galleryImages: [
       "https://tpc-store.com/wp-content/uploads/2024/05/1-242.webp",
@@ -465,8 +466,8 @@ export const fallbackCatalogue: FallbackProduct[] = [
     featured: false,
     category: "Ordinateurs portables",
     categorySlug: "ordinateurs-portables",
-    shortDescription: "Core i7-7600U · 16 Go DDR4 · SSD 512 Go · NVIDIA annoncée · 200 000 FCFA",
-    description: "Dell Latitude 5580, surnommé « Satan 2 » dans l’annonce, proposé à 200 000 FCFA. Configuration annoncée : Intel Core i7-7600U à 2,80 GHz, 16 Go de RAM DDR4 et SSD de 512 Go. L’annonce cite à la fois une NVIDIA GeForce 940MX et une GeForce 950MX : la carte réellement installée est à confirmer. Dell documente une GeForce 940MX parmi les options du Latitude 5580 et indique un maximum officiel de 32 Go de mémoire; l’extension à 64 Go annoncée par le vendeur n’est donc pas reprise comme caractéristique garantie. Clavier rétroéclairé, écran 15,6 pouces, lecteur d’empreintes, USB-C et HDMI annoncés. Les logiciels de CAO/Adobe et jeux cités dépendent des exigences du programme et du GPU effectivement installé; leur compatibilité ou leurs performances ne sont pas garanties par cette fiche. Les images de la galerie illustrent le modèle, elles ne montrent pas nécessairement l’appareil vendu.",
+    shortDescription: "Core i7-7600U · 16 Go DDR4 · SSD 512 Go · NVIDIA annoncée · 195 000 FCFA",
+    description: "Dell Latitude 5580, surnommé « Satan 2 » dans l’annonce, proposé à 195 000 FCFA. Configuration annoncée : Intel Core i7-7600U à 2,80 GHz, 16 Go de RAM DDR4 et SSD de 512 Go. L’annonce cite à la fois une NVIDIA GeForce 940MX et une GeForce 950MX : la carte réellement installée est à confirmer. Dell documente une GeForce 940MX parmi les options du Latitude 5580 et indique un maximum officiel de 32 Go de mémoire; l’extension à 64 Go annoncée par le vendeur n’est donc pas reprise comme caractéristique garantie. Clavier rétroéclairé, écran 15,6 pouces, lecteur d’empreintes, USB-C et HDMI annoncés. Les logiciels de CAO/Adobe et jeux cités dépendent des exigences du programme et du GPU effectivement installé; leur compatibilité ou leurs performances ne sont pas garanties par cette fiche. Les images de la galerie illustrent le modèle, elles ne montrent pas nécessairement l’appareil vendu.",
     specifications: [
       { name: "Processeur", value: "Intel Core i7-7600U, 2,80 GHz annoncés", group: "Performance" },
       { name: "Mémoire", value: "16 Go DDR4 PC4", group: "Performance" },
@@ -477,8 +478,8 @@ export const fallbackCatalogue: FallbackProduct[] = [
       { name: "Clavier", value: "Rétroéclairé", group: "Conception" },
       { name: "Sécurité", value: "Lecteur d’empreintes annoncé", group: "Connectique" },
       { name: "Ports", value: "USB-C et HDMI annoncés; cinq ports USB indiqués dans l’annonce, nombre à vérifier sur l’appareil", group: "Connectique" },
-      { name: "Prix", value: "200 000 FCFA", group: "Prix" },
     ],
+    updateExisting: true,
   },
   {
     id: "fallback-msi-stealth-16-ai-studio-ultra-9-4070",
@@ -512,6 +513,202 @@ export const fallbackCatalogue: FallbackProduct[] = [
     ],
   },
 ];
+
+const catalogueImagePools: Record<string, string[]> = {
+  hp: [
+    "https://static3.webx.pk/files/35368/Images/hp-850-g6-7-35368-2110544-140624122706509.jpg",
+    "https://img.parkiashop.com/products/1761749331484-202cc1e4-whatsapp-image-2025-10-27-at-1.jpeg",
+    "https://laptop.bg/system/images/233782/original/EliteBook_850_G6.png",
+    "https://imagedelivery.net/pjXEwQ5mgCM0WtJa4WheRQ/e77e57fe-e94e-4303-b409-3d7081d3c300/ProductViewThumb",
+    "https://pchouseci.com/cdn/shop/files/HP430G710_1024x1024%402x.jpg?v=1772539308",
+    "https://cl-media.hptiendaenlinea.com/catalog/product/6/K/6KB10LT-1_T1679647912.png",
+    "https://www.germancomputers.al/web/image/product.template/29157/image_1024?unique=67f5753",
+    "https://www.mastermedia.lublin.pl/31450-medium_default/laptop-hp-elitebook-850-i5-8gen-16gb-ram-512gb-ssd-win-11-pro-klasa-a.jpg",
+  ],
+  dell: [
+    "https://cdn.cs.1worldsync.com/6d/be/6dbea5a7-5a90-43a2-a276-5658e6ec33fa.jpg",
+    "https://mtunda.ug/cdn/shop/products/latitude-3410-3.jpg?v=1651919754&width=1445",
+    "https://king-tech-eg.com/cdn/shop/files/dell-latitude-5510-2.jpg?v=1766602973",
+    "https://shop.ibankonit.com/cdn/shop/files/2a0c4d4b816b597a8c605a8de4844170.jpg?v=1740564665&width=987",
+    "https://cdn.cs.1worldsync.com/7e/4f/7e4f25db-fcd8-4f84-85cc-89dec36fcafb.jpg",
+    "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/workstations/mobile-workstations/precision/3551/global-spi/ng/notebook-precision-15-3551-campaign-hero-504x350-ng.psd?fmt=jpg&hei=400&wid=570",
+    "https://laptoparena.net/images/DELL_Latitude_3300_80TJM_image_2.jpg",
+    "https://www.laptopid.ee/images/product/584/3460/medium.png?_=77497150",
+    "https://static.webx.pk/files/78721/Images/5580-1-78721-2208201-230924104748300.jpg",
+    "https://www.scan.co.uk/images/products/super/3322244-l-a.jpg",
+  ],
+  lenovo: [
+    "https://www.kuzniewski.pl/images/kategorie/szablony_zdjec/Lenovo_ThinkPad_P14s_Gen1_01.jpg",
+    "https://psrefstuff.lenovo.com/syspool/Sys/Image/ThinkPad/ThinkPad_T14_Gen_1_AMD/ThinkPad_T14_Gen_1_AMD_CT1_08.png",
+    "https://www.discoazul.pt/uploads/media/images/portatil-lenovo-miix-520-i7-8550u-16gb-ssd-1tb-12.jpg",
+    "https://www.laptopfactory.pl/userdata/public/gfx/53038/Lenovo-ThinkPad-T14-Gen-1-z-Intel-i5-10310U--szybka%2C-niezawodna-praca-i-mobilnosc-w-eleganckim-wydaniu%2C-idealna-do-codziennych-wyzwan-4.jpg",
+    "https://www.bhphotovideo.com/images/fb/lenovo_20rd005gus_thinkpad_e15_i5_10210u_8gb_1549113.jpg",
+    "https://www.euronics.it/dw/image/v2/BFPN_PRD/on/demandware.static/-/Sites-catalog_euronics_master/default/dw74bcdbfa/hi-res/212000407.jpg?q=90&strip=false&sw=1000",
+    "https://i5.walmartimages.com/seo/Restored-Lenovo-ThinkPad-T14-Gen-1-14-16GB-256GB-SSD-AMD-Ryzen-5-Pro-4650U-2-1GHz-WIN11P-Black-Refurbished_c68afe81-2624-4d6e-88e3-f3bbf69250b1.74dea80f041ba188195591e814d1d44f.jpeg",
+    "https://gfx3.senetic.com/akeneo-catalog/e/6/2/c/e62caec4dc57a9e6667efdf9e30c43c0defd8715_1699953_20U9004MMX_image1.jpg",
+  ],
+  msi: [
+    "https://www.cerber.ua/files/resized/products/photoroom-20231219_182258.700x800.png",
+    "https://asset.msi.com/resize/image/global/product/product_1_20170116182957_587ca0a558cf7.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png",
+    "https://brain-images-ssl.cdn.dixons.com/8/3/10158038/l_10158038_006.jpg",
+    "https://files.pccasegear.com/UserFiles/GT62VR-7RD-290AU-l.jpg",
+    "https://imagecdn.jw.com.au/media/catalog/product/g/l/gl62mvr_7rfx_-_1_1.png?height=514&image-type=image&store=default&width=514",
+    "https://down-my.img.susercontent.com/file/my-11134207-7rasc-m3g62tpuumpof3",
+  ],
+  stand: [
+    "https://m.media-amazon.com/images/I/51KyaTB1EKL._AC_SL1500_.jpg",
+    "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202404/02/00128638804279____1__1200x1200.jpg",
+    "https://www.nillkin.com/cdn/shop/products/ProDeskAdjustableLaptopStand-Sliver.jpg?v=1690029878&width=1000",
+    "https://media.s-bol.com/6pR9408ng3kn/yPMExvz/550x615.jpg",
+    "https://www.paperstone.co.uk/images/425/CE10135.jpg?v=s_AXAB21XTE",
+    "https://teknikhallen.se/upload/ID10/10813-2022/9589046919398-1.jpg",
+  ],
+  projector: [
+    "https://image.made-in-china.com/2f0j00hJBtWvndLQop/Factory-Wholesale-LED-Projector-with-USB-AV-TV-HDMI-VGA-Headphone-Jack.webp",
+    "https://makeshop-multi-images.akamaized.net/shakou/itemimages/000000003066_8szBHsg.jpg",
+    "https://p.globalsources.com/IMAGES/PDT/B6026007106/projector.jpg",
+    "https://st5.depositphotos.com/33457736/64704/i/450/depositphotos_647045624-stock-photo-projector-rendering-isolated-white-background.jpg",
+    "https://cdn.moglix.com/p/bHmIlMaDe0bYz-xxlarge.jpg",
+    "https://golfbays.com/cdn/shop/files/DSCF4878_cf72382a-b485-4f33-803e-0a16adaba698.jpg?v=1770405312",
+  ],
+  usb: [
+    "https://www.avxperten.dk/images/product/211041/original/f424ce81-5dc2-4241-a725-bab66f92730d.webp",
+    "https://ik.imagekit.io/pimberly/595e406f0f15f30010780448/4c55f5b4/6554d073fa07cc259400036c/TRDTS32GJF700_02.jpg?tr=w-1500%2Ch-1500%2Ccm-pad_resize%2Cbg-FFFFFF",
+    "https://compuden.co.za/cdn/shop/files/11756283_2831132412_02cad03e-1323-49be-ad55-08c4346e69d0.webp?v=1746689211",
+    "https://dh9cuahs6ezpz.cloudfront.net/images/products/550x550/transcend-17178-2_95735.jpg",
+    "https://media.rs-online.com/Y1871709-01.jpg",
+    "https://www.verbatim-europe.com/files/products/pinstripe-usb-drive/49320-no-packaging-angled-open-thumbnail.png",
+  ],
+  storage: [
+    "https://ireland.apollo.olxcdn.com/v1/files/d03tbxnju3ik1-UA/image%3Bs%3D4000x2566",
+    "https://frankfurt.apollo.olxcdn.com/v1/files/58lj0a6bevnb2-BG/image%3Bs%3D2048x1536",
+    "https://hd2.tudocdn.net/880524?w=1920",
+    "https://i.ebayimg.com/images/g/djQAAOSwq8Vi8HYr/s-l1200.jpg",
+    "https://down-tw.img.susercontent.com/file/sg-11134201-22110-wu9myn10zfkvc4",
+    "https://images.zentail.com/1614/7108b969bd3af7844e991a753c7441d04f6bd57ad47e11f52ee8440320a5ca5d.jpeg",
+  ],
+  hdd: [
+    "https://down-id.img.susercontent.com/file/id-11134207-7ra0p-mdi9s8ebc3v28f",
+    "https://i.ebayimg.com/images/g/bYUAAOSwOoVkQNhd/s-l1200.jpg",
+    "https://i.ebayimg.com/images/g/aGUAAOSwyTtdNHNf/s-l1200.jpg",
+    "https://static-01.daraz.pk/p/7133cb72ff5a1c642d396e78500c13f5.jpg",
+    "https://cdn11.bigcommerce.com/s-qfzamxn9kz/images/stencil/original/products/121596/375085/WD2500BEVT-7__39940.1573224343.jpg?c=2",
+    "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lrtkc9xicm2sd8",
+  ],
+  ram: [
+    "https://m.media-amazon.com/images/I/71or9Qhu72L.jpg",
+    "https://s3-eu-west-1.amazonaws.com/images.linnlive.com/7029b6745ca306c00a10591b58c9224f/75aeebbd-e77f-4bff-bdc9-6f0b6d9c2915.jpg",
+    "https://i.ebayimg.com/images/g/-zAAAOSwzh1i4M~t/s-l1200.jpg",
+    "https://media.ldlc.com/r705/ld/products/00/05/69/73/LD0005697325_1_0005697327_0005697328.jpg",
+    "https://nairobicomputershop.co.ke/media/cache/5c/4b/5c4b33f4519404c4b13d2a10e4c4dea0.jpg",
+    "https://cdn11.bigcommerce.com/s-je364a6h/images/stencil/1280x1280/products/216878/174204/original__62769.1619638632.png?c=2&imbypass=on",
+  ],
+  equipment: [
+    "https://m.media-amazon.com/images/I/51KyaTB1EKL._AC_SL1500_.jpg",
+    "https://media.s-bol.com/6pR9408ng3kn/yPMExvz/550x615.jpg",
+    "https://www.paperstone.co.uk/images/425/CE10135.jpg?v=s_AXAB21XTE",
+    "https://www.avxperten.dk/images/product/211041/original/f424ce81-5dc2-4241-a725-bab66f92730d.webp",
+    "https://media.rs-online.com/Y1871709-01.jpg",
+    "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202404/02/00128638804279____1__1200x1200.jpg",
+  ],
+};
+
+type BulkProductInput = {
+  slug: string; name: string; brand: string; cost: number; details: string;
+  pool: keyof typeof catalogueImagePools; equipment?: boolean; starting?: boolean;
+};
+
+const bulkProductInputs: BulkProductInput[] = [
+  { slug: "hp-elitebook-850-g6-i5-8-go-256-go", name: "HP EliteBook 850 G6", brand: "HP", cost: 140000, details: "Processeur: Intel Core i5, 8e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 15,6 pouces", pool: "hp" },
+  { slug: "hp-elitebook-x360-435-g7-ryzen-3-pro-8-go-256-go", name: "HP EliteBook x360 435 G7", brand: "HP", cost: 150000, details: "Processeur: AMD Ryzen 3 Pro|Stockage: 256 Go|Mémoire: 8 Go|Écran: 13,3 pouces|Format: Tactile et pliable", pool: "hp" },
+  { slug: "hp-elitebook-850-g3-i5-6e-generation", name: "HP EliteBook 850 G3", brand: "HP", cost: 100000, details: "Processeur: Intel Core i5, 6e génération|Écran: 15,6 pouces", pool: "hp" },
+  { slug: "hp-probook-640-g4-i5-8-go-256-go", name: "HP ProBook 640 G4", brand: "HP", cost: 110000, details: "Processeur: Intel Core i5, 8e génération|Stockage: 256 Go|Mémoire: 8 Go", pool: "hp" },
+  { slug: "hp-250-g7-i7-8e-generation-8-go-256-go", name: "HP 250 G7", brand: "HP", cost: 130000, details: "Processeur: Intel Core i7, 8e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 15,6 pouces", pool: "hp" },
+  { slug: "hp-probook-645-g4-ryzen-3-pro-8-go-500-go", name: "HP ProBook 645 G4", brand: "HP", cost: 125000, details: "Processeur: AMD Ryzen 3 Pro|Stockage: 500 Go, type à confirmer|Mémoire: 8 Go|Carte graphique: 1 Go dédié|Écran: 14 pouces", pool: "hp" },
+  { slug: "hp-elitebook-x360-830-g6-i5-8-go-256-go", name: "HP EliteBook x360 830 G6", brand: "HP", cost: 160000, details: "Processeur: Intel Core i5, 8e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 13,3 pouces|Format: Tactile", pool: "hp" },
+  { slug: "hp-probook-430-g7-i3-10e-generation-8-go-256-go", name: "HP ProBook 430 G7", brand: "HP", cost: 100000, details: "Processeur: Intel Core i3, 10e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 13,3 pouces", pool: "hp" },
+  { slug: "hp-probook-640-g2-i5-6e-generation-8-go-256-go", name: "HP ProBook 640 G2", brand: "HP", cost: 90000, details: "Processeur: Intel Core i5, 6e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 14 pouces", pool: "hp" },
+  { slug: "hp-elitebook-745-g6-ryzen-5-pro-3500u-8-go-256-go", name: "HP EliteBook 745 G6", brand: "HP", cost: 150000, details: "Processeur: AMD Ryzen 5 Pro 3500U|Stockage: 256 Go|Mémoire: 8 Go|Carte graphique: 2 Go dédié, modèle à confirmer|Écran: 14 pouces", pool: "hp" },
+
+  { slug: "dell-latitude-3300-i3-7e-4-go-128-go", name: "Dell Latitude 3300", brand: "Dell", cost: 65000, details: "Processeur: Intel Core i3, 7e génération|Stockage: 128 Go|Mémoire: 4 Go|Écran: 13,3 pouces", pool: "dell" },
+  { slug: "dell-latitude-5410-i5-10e-8-go-256-go", name: "Dell Latitude 5410 Core i5", brand: "Dell", cost: 135000, details: "Processeur: Intel Core i5, 10e génération|Stockage: 256 Go|Mémoire: 8 Go", pool: "dell" },
+  { slug: "dell-latitude-3530-i7-8e-16-go-512-go", name: "Dell Latitude 3530", brand: "Dell", cost: 235000, details: "Processeur: Intel Core i7, 8e génération (référence à confirmer)|Stockage: 512 Go|Mémoire: 16 Go|Carte graphique: 4 Go dédié|Écran: 15,6 pouces", pool: "dell" },
+  { slug: "dell-latitude-3410-i5-10e-16-go-256-go", name: "Dell Latitude 3410", brand: "Dell", cost: 140000, details: "Processeur: Intel Core i5, 10e génération|Stockage: 256 Go|Mémoire: 16 Go|Écran: 14 pouces", pool: "dell" },
+  { slug: "dell-precision-3551-i7-10e-16-go-512-go", name: "Dell Precision 3551", brand: "Dell", cost: 240000, details: "Processeur: Intel Core i7, 10e génération|Stockage: SSD 512 Go|Mémoire: 16 Go|Carte graphique: 4 Go dédié|Écran: 15,6 pouces", pool: "dell" },
+  { slug: "dell-latitude-5510-i5-10e-8-go-256-go", name: "Dell Latitude 5510", brand: "Dell", cost: 130000, details: "Processeur: Intel Core i5, 10e génération|Stockage: 256 Go|Mémoire: 8 Go", pool: "dell" },
+  { slug: "dell-latitude-3190-dual-core-4-go-128-go", name: "Dell Latitude 3190", brand: "Dell", cost: 50000, details: "Processeur: Dual core|Stockage: 128 Go|Mémoire: 4 Go", pool: "dell" },
+  { slug: "dell-latitude-5320-2-en-1-neuf-i7-11e-8-go-256-go", name: "Dell Latitude 5320 2-en-1 Neuf", brand: "Dell", cost: 300000, details: "Processeur: Intel Core i7, 11e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 13,3 pouces|Format: Tactile et pliable|État: Neuf", pool: "dell" },
+  { slug: "dell-latitude-5410-neuf-i5-10e-8-go-256-go", name: "Dell Latitude 5410 Neuf", brand: "Dell", cost: 210000, details: "Processeur: Intel Core i5, 10e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 14 pouces|État: Neuf", pool: "dell" },
+  { slug: "dell-latitude-3189-2-en-1-quad-core-8-go-128-go", name: "Dell Latitude 3189 2-en-1", brand: "Dell", cost: 65000, details: "Processeur: Quad core|Stockage: 128 Go|Mémoire: 8 Go|Écran: 11,6 pouces|Format: 2-en-1", pool: "dell" },
+
+  { slug: "lenovo-yoga-11e-m3-7e-8-go-256-go", name: "Lenovo Yoga 11e Core m3", brand: "Lenovo", cost: 75000, details: "Processeur: Intel Core m3, 7e génération|Stockage: 256 Go|Mémoire: 8 Go", pool: "lenovo" },
+  { slug: "lenovo-11e-dual-core-4-go-128-go", name: "Lenovo 11e Dual Core", brand: "Lenovo", cost: 50000, details: "Processeur: Dual core|Stockage: 128 Go|Mémoire: 4 Go|Écran: 11,6 pouces", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-p14s-i7-10e-16-go-512-go-2-go", name: "Lenovo ThinkPad P14s Core i7 10e génération", brand: "Lenovo", cost: 185000, details: "Processeur: Intel Core i7, 10e génération|Stockage: 512 Go|Mémoire: 16 Go|Carte graphique: 2 Go dédié|Écran: 14 pouces", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-p14s-i7-11e-16-go-512-go-4-go", name: "Lenovo ThinkPad P14s Core i7 11e génération", brand: "Lenovo", cost: 240000, details: "Processeur: Intel Core i7, 11e génération|Stockage: 512 Go|Mémoire: 16 Go|Carte graphique: 4 Go dédié|Écran: 14 pouces", pool: "lenovo" },
+  { slug: "lenovo-miix-520-i5-8e-8-go-256-go", name: "Lenovo MIIX 520", brand: "Lenovo", cost: 100000, details: "Processeur: Intel Core i5, 8e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 12,5 pouces|Format: Tactile et détachable", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-t14-gen1-amd-ryzen-5-pro-8-go-256-go", name: "Lenovo ThinkPad T14 Gen 1 AMD", brand: "Lenovo", cost: 145000, details: "Processeur: AMD Ryzen 5 Pro|Stockage: 256 Go|Mémoire: 8 Go|Carte graphique: 2 Go dédié annoncés|Écran: 14 pouces", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-x1-carbon-i5-10e-16-go-256-go-tactile", name: "Lenovo ThinkPad X1 Carbon Gen 8 Core i5", brand: "Lenovo", cost: 160000, details: "Processeur: Intel Core i5, 10e génération|Stockage: 256 Go|Mémoire: 16 Go|Écran: 14 pouces tactile", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-x1-carbon-i7-10e-16-go-256-go-tactile", name: "Lenovo ThinkPad X1 Carbon Gen 8 Core i7", brand: "Lenovo", cost: 165000, details: "Processeur: Intel Core i7, 10e génération|Stockage: 256 Go|Mémoire: 16 Go|Écran: 14 pouces tactile", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-x13-yoga-i5-10e-8-go-256-go", name: "Lenovo ThinkPad X13 Yoga", brand: "Lenovo", cost: 140000, details: "Processeur: Intel Core i5, 10e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 13,3 pouces", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-p70-i7-6e-16-go-128-go-1-to", name: "Lenovo ThinkPad P70", brand: "Lenovo", cost: 150000, details: "Processeur: Intel Core i7, 6e génération|Stockage: 128 Go + 1 To|Mémoire: 16 Go|Carte graphique: 2 Go dédié|Écran: 17,3 pouces", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-e580-i5-8e-8-go-256-go", name: "Lenovo ThinkPad E580", brand: "Lenovo", cost: 115000, details: "Processeur: Intel Core i5, 8e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 15,6 pouces", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-t480-i5-8e-8-go-256-go", name: "Lenovo ThinkPad T480", brand: "Lenovo", cost: 100000, details: "Processeur: Intel Core i5, 8e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 14 pouces", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-t580-t570-i5-7e-8e-8-go-256-go", name: "Lenovo ThinkPad T580 / T570", brand: "Lenovo", cost: 110000, details: "Processeur: Intel Core i5, 7e ou 8e génération selon modèle|Stockage: 256 Go|Mémoire: 8 Go|Écran: 15,6 pouces", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-e15-i5-10e-8-go-256-go", name: "Lenovo ThinkPad E15", brand: "Lenovo", cost: 130000, details: "Processeur: Intel Core i5, 10e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 15,6 pouces", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-e14-i5-10e-8-go-256-go", name: "Lenovo ThinkPad E14", brand: "Lenovo", cost: 125000, details: "Processeur: Intel Core i5, 10e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 14 pouces", pool: "lenovo" },
+  { slug: "lenovo-thinkpad-t14-i5-10e-8-go-256-go", name: "Lenovo ThinkPad T14 Core i5", brand: "Lenovo", cost: 125000, details: "Processeur: Intel Core i5, 10e génération|Stockage: 256 Go|Mémoire: 8 Go|Écran: 14 pouces", pool: "lenovo" },
+  { slug: "lenovo-yoga-11e-gen6-m3-7e-4-go-128-go-tactile", name: "Lenovo Yoga 11e Gen 6", brand: "Lenovo", cost: 65000, details: "Processeur: Intel Core m3, 7e génération|Stockage: 128 Go|Mémoire: 4 Go|Écran: 11,6 pouces tactile|Format: Tactile et pliable", pool: "lenovo" },
+  { slug: "lenovo-yoga-300e-4-go-64-go-tactile", name: "Lenovo Yoga 300e", brand: "Lenovo", cost: 50000, details: "Stockage: 64 Go|Mémoire: 4 Go|Écran: 11,6 pouces tactile|Format: Tactile et pliable", pool: "lenovo" },
+
+  { slug: "msi-gaming-i7-7e-24-go-256-go-1-to-6-go", name: "MSI Gaming Core i7 7e génération", brand: "MSI", cost: 275000, details: "Processeur: Intel Core i7, 7e génération|Stockage: 256 Go + 1 To|Mémoire: 24 Go|Carte graphique: 6 Go dédié, modèle à confirmer|Écran: 15,6 pouces", pool: "msi" },
+  { slug: "desktop-complet", name: "Ordinateur de bureau complet", brand: "Zink Tech", cost: 47000, details: "Prix: À partir de 62 000 FCFA", pool: "equipment", equipment: true, starting: true },
+  { slug: "support-laptop", name: "Support pour ordinateur portable", brand: "Accessoires", cost: 3000, details: "Type: Support pour laptop", pool: "stand", equipment: true },
+  { slug: "disque-dur-512-go", name: "Disque dur 512 Go", brand: "Stockage", cost: 30000, details: "Capacité: 512 Go|Type: Disque dur, interface à confirmer", pool: "hdd", equipment: true },
+  { slug: "mousse-nettoyage-informatique", name: "Mousse de nettoyage informatique", brand: "Entretien", cost: 3000, details: "Type: Mousse de nettoyage", pool: "equipment", equipment: true },
+  { slug: "sac-ordinateur-portable", name: "Sac pour ordinateur portable", brand: "Accessoires", cost: 4000, details: "Type: Sac pour laptop", pool: "equipment", equipment: true },
+  { slug: "cle-usb", name: "Clé USB", brand: "Stockage", cost: 2500, details: "Prix: À partir de 17 500 FCFA", pool: "usb", equipment: true, starting: true },
+  { slug: "televiseur-smart-toshiba-32-pouces", name: "Téléviseur Smart Toshiba 32 pouces", brand: "Toshiba", cost: 65000, details: "Écran: 32 pouces|Fonction: Smart TV", pool: "equipment", equipment: true },
+  { slug: "onduleur-e-assure-725va", name: "Onduleur e-Assure 725 VA", brand: "e-Assure", cost: 25000, details: "Puissance: 725 VA", pool: "equipment", equipment: true },
+  { slug: "projecteur", name: "Projecteur", brand: "Équipement audiovisuel", cost: 70000, details: "Prix: À partir de 85 000 FCFA|Location: Possible, tarif à confirmer", pool: "projector", equipment: true, starting: true },
+  { slug: "upgrade-ssd-256-go-vers-512-go", name: "Mise à niveau SSD 256 Go vers 512 Go", brand: "Stockage", cost: 25000, details: "Mise à niveau: SSD de 256 Go vers 512 Go", pool: "storage", equipment: true },
+  { slug: "upgrade-ssd-256-go-vers-1-to", name: "Mise à niveau SSD 256 Go vers 1 To", brand: "Stockage", cost: 45000, details: "Mise à niveau: SSD de 256 Go vers 1 To", pool: "storage", equipment: true },
+  { slug: "upgrade-ssd-512-go-vers-1-to", name: "Mise à niveau SSD 512 Go vers 1 To", brand: "Stockage", cost: 35000, details: "Mise à niveau: SSD de 512 Go vers 1 To", pool: "storage", equipment: true },
+  { slug: "upgrade-ram-8-go-vers-16-go", name: "Mise à niveau mémoire 8 Go vers 16 Go", brand: "Mémoire", cost: 15000, details: "Mise à niveau: RAM de 8 Go vers 16 Go", pool: "ram", equipment: true },
+  { slug: "upgrade-ram-16-go-vers-32-go", name: "Mise à niveau mémoire 16 Go vers 32 Go", brand: "Mémoire", cost: 20000, details: "Mise à niveau: RAM de 16 Go vers 32 Go", pool: "ram", equipment: true },
+];
+
+const bulkProducts: FallbackProduct[] = bulkProductInputs.map((input, index) => {
+  const category = input.equipment ? "Équipements et accessoires" : "Ordinateurs portables";
+  const categorySlug = input.equipment ? "equipements" : "ordinateurs-portables";
+  const imagePool = catalogueImagePools[input.pool];
+  const imageOffset = index % imagePool.length;
+  const images = Array.from({ length: 6 }, (_, imageIndex) => imagePool[(imageOffset + imageIndex) % imagePool.length]);
+  const specifications = input.details.split("|").map((item) => {
+    const [name, ...value] = item.split(":");
+    return { name: name.trim(), value: value.join(":").trim(), group: name.trim() === "Écran" ? "Affichage" : "Configuration" };
+  });
+  const price = input.cost + 15000;
+  const shortDescription = `${input.details.replaceAll("|", " · ")} · ${input.starting ? "dès " : ""}${price.toLocaleString("fr-FR")} FCFA`;
+  return {
+    id: `fallback-${input.slug}`,
+    slug: input.slug,
+    name: input.name,
+    brand: input.brand,
+    price,
+    image: images[0],
+    galleryImages: images.slice(1),
+    inStock: true,
+    featured: false,
+    category,
+    categorySlug,
+    shortDescription,
+    description: `${input.name} proposé au prix de vente de ${price.toLocaleString("fr-FR")} FCFA. ${input.details.replaceAll("|", ". ")}. Les informations de configuration sont celles du catalogue fourni et restent à confirmer avec la référence de l’appareil. Les photos sont des images d’illustration de la gamme et ne représentent pas nécessairement l’unité vendue.`,
+    specifications,
+    ...(input.starting ? { priceIsEstimate: true } : {}),
+  };
+});
+
+fallbackCatalogue.push(...bulkProducts);
 
 export function getFallbackProducts(options: { categorySlug?: string; featured?: boolean; take?: number } = {}) {
   const products = fallbackCatalogue.filter((product) =>

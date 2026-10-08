@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://zinktech.cm";
-  const paths = ["", "/ordinateurs-portables", "/smartphones", "/marques", "/marques/hp", "/marques/dell", "/marques/lenovo", "/marques/apple", "/marques/samsung", "/marques/xiaomi", "/entreprises"];
+  const paths = ["", "/ordinateurs-portables", "/equipements", "/smartphones", "/marques", "/marques/hp", "/marques/dell", "/marques/lenovo", "/marques/apple", "/marques/samsung", "/marques/xiaomi", "/entreprises"];
   return paths.map((path, index) => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date(),

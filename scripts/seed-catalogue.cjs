@@ -77,6 +77,25 @@ async function seedCatalogue() {
           select: { id: true },
         });
         productsCreated += 1;
+      } else if (product.updateExisting) {
+        await transaction.product.update({
+          where: { id: existing.id },
+          data: {
+            name: product.name,
+            description: product.description,
+            shortDescription: product.shortDescription,
+            price: product.price,
+            specifications: {
+              deleteMany: {},
+              create: product.specifications.map((specification, order) => ({
+                key: specification.name,
+                value: specification.value,
+                group: specification.group,
+                order,
+              })),
+            },
+          },
+        });
       }
 
       const urls = [product.image, ...(product.galleryImages || [])];
