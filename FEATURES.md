@@ -256,7 +256,7 @@
 ### 3. Cameroon-First
 - ✅ Prices in FCFA
 - ✅ French language
-- ✅ Local delivery (Douala, Yaoundé, etc.)
+- ✅ Local delivery (Yaoundé and surrounding areas)
 - ✅ Local phone number
 - ✅ Understanding of local market
 

@@ -6,8 +6,8 @@ import { getStoreProducts } from "@/lib/catalogue";
 
 export const metadata: Metadata = {
   title: "Ordinateurs Portables au Cameroun - HP, Dell, Lenovo | Zink Tech",
-  description: "Découvrez notre sélection d'ordinateurs portables des meilleures marques. HP ProBook, Dell Latitude, Lenovo ThinkPad, MacBook et plus. Livraison à Douala et Yaoundé.",
-  keywords: "ordinateur portable Cameroun, laptop Douala, HP ProBook, Dell Latitude, Lenovo ThinkPad, MacBook Air",
+  description: "Découvrez notre sélection d'ordinateurs portables des meilleures marques. HP ProBook, Dell Latitude, Lenovo ThinkPad, MacBook et plus. Livraison à Yaoundé.",
+  keywords: "ordinateur portable Cameroun, laptop Yaoundé, HP ProBook, Dell Latitude, Lenovo ThinkPad, MacBook Air",
 };
 
 export default async function LaptopsPage() {

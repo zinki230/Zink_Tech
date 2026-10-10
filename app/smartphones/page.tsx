@@ -6,8 +6,8 @@ import { getStoreProducts } from "@/lib/catalogue";
 
 export const metadata: Metadata = {
   title: "Smartphones au Cameroun - iPhone, Samsung, Xiaomi | Zink Tech",
-  description: "Achetez les meilleurs smartphones au Cameroun. iPhone, Samsung Galaxy, Xiaomi, Tecno, Infinix et plus. Prix en FCFA, livraison à Douala et Yaoundé.",
-  keywords: "smartphone Cameroun, iPhone Douala, Samsung Galaxy, Xiaomi, Tecno, Infinix, téléphone portable Yaoundé",
+  description: "Achetez les meilleurs smartphones au Cameroun. iPhone, Samsung Galaxy, Xiaomi, Tecno, Infinix et plus. Prix en FCFA, livraison à Yaoundé.",
+  keywords: "smartphone Cameroun, iPhone Yaoundé, Samsung Galaxy, Xiaomi, Tecno, Infinix, téléphone portable Yaoundé",
 };
 
 export default async function SmartphonesPage() {

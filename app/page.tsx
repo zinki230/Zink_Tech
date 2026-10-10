@@ -25,9 +25,9 @@ const stats = [
 ];
 
 const testimonials = [
-  { name: "Paul D.", role: "Directeur PME, Douala", text: "Zink Tech nous a équipés de 15 postes ThinkPad en 48h. Le conseil était impeccable et le suivi WhatsApp très réactif.", rating: 5 },
+  { name: "Paul D.", role: "Directeur PME, Yaoundé", text: "Zink Tech nous a équipés de 15 postes ThinkPad en 48h. Le conseil était impeccable et le suivi WhatsApp très réactif.", rating: 5 },
   { name: "Sarah M.", role: "Freelance, Yaoundé", text: "Je cherchais un MacBook Air au meilleur prix. Le conseiller m'a guidée, la livraison a été rapide. Je recommande !", rating: 5 },
-  { name: "Jean K.", role: "Étudiant, Douala", text: "J'avais un budget serré, on m'a trouvé l'ordinateur idéal pour mes études. Prix honnête et service exceptionnel.", rating: 5 },
+  { name: "Jean K.", role: "Étudiant, Yaoundé", text: "J'avais un budget serré, on m'a trouvé l'ordinateur idéal pour mes études. Prix honnête et service exceptionnel.", rating: 5 },
 ];
 
 export default async function HomePage() {
@@ -46,7 +46,7 @@ export default async function HomePage() {
             {[
               [ShieldCheck, "Des choix éclairés", "Un conseiller vous guide"],
               [PackageCheck, "Disponibilité confirmée", "Avant validation WhatsApp"],
-              [Truck, "Livraison organisée", "À Douala et ailleurs au Cameroun"],
+              [Truck, "Livraison organisée", "À Yaoundé et ailleurs au Cameroun"],
               [Headphones, "Un vrai interlocuteur", "Échange direct et humain"],
             ].map(([Icon, title, subtitle]: any, i) => (
               <div key={title} className="flex items-center gap-3 px-3 py-5 transition hover:bg-[#faf9f6] sm:gap-4 sm:py-7">
@@ -289,7 +289,7 @@ export default async function HomePage() {
       {/* ─── BOTTOM BAR ─── */}
       <div className="border-t border-[#e8e7e1] bg-[#f7f7f2] py-5">
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-center gap-x-7 gap-y-2 px-5 text-xs text-[#747d75] sm:px-8 lg:justify-between lg:px-14">
-          <span className="inline-flex items-center gap-2"><MapPin size={14} /> Douala, Cameroun</span>
+          <span className="inline-flex items-center gap-2"><MapPin size={14} /> Yaoundé, Cameroun</span>
           <span>Ordinateurs · Smartphones · Solutions informatiques</span>
           <Link href="/entreprises" className="inline-flex items-center gap-2 font-medium text-[#1768b7] transition hover:text-[#289844]">
             Besoin d&apos;équiper une entreprise ? <ArrowRight size={14} />

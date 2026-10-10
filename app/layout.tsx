@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   description:
     "Votre partenaire technologique au Cameroun. Découvrez les meilleures marques d'ordinateurs portables, PC de bureau, smartphones et équipements IT. HP, Dell, Lenovo, Apple, Samsung et plus.",
-  keywords: ["ordinateur portable Cameroun", "smartphone Douala", "informatique Cameroun", "Zink Tech"],
+  keywords: ["ordinateur portable Cameroun", "smartphone Yaoundé", "informatique Cameroun", "Zink Tech"],
   icons: { icon: "/brand/zink-tech-mark.png" },
   openGraph: {
     type: "website",
@@ -43,7 +43,7 @@ export default function RootLayout({
     url: "https://zinktech.cm",
     email: "contact@zinktech.cm",
     telephone: "+237657413164",
-    address: { "@type": "PostalAddress", addressLocality: "Douala", addressCountry: "CM" },
+    address: { "@type": "PostalAddress", addressLocality: "Yaoundé", addressCountry: "CM" },
     areaServed: { "@type": "Country", name: "Cameroun" },
     contactPoint: { "@type": "ContactPoint", telephone: "+237657413164", contactType: "customer service", availableLanguage: ["French"] },
   };

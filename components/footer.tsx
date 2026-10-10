@@ -117,7 +117,7 @@ export function Footer() {
           <ul className="mt-5 space-y-4 text-sm text-white/75">
             <li className="flex items-center gap-3">
               <MapPin size={16} className="shrink-0 text-[#54b948]" />
-              <span>Douala, Cameroun</span>
+              <span>Yaoundé, Cameroun</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone size={16} className="shrink-0 text-[#54b948]" />
@@ -156,7 +156,7 @@ export function Footer() {
         <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-3 px-5 text-xs text-white/50 sm:flex-row sm:px-8 lg:px-14">
           <span>&copy; {new Date().getFullYear()} Zink Tech. Tous droits réservés.</span>
           <span className="flex items-center gap-4">
-            <span className="inline-flex items-center gap-2"><MapPin size={12} /> Douala, Cameroun</span>
+            <span className="inline-flex items-center gap-2"><MapPin size={12} /> Yaoundé, Cameroun</span>
             <Link href="/entreprises" className="flex items-center gap-1 text-[#54b948] transition hover:text-white">
               Solutions entreprises <ArrowUpRight size={12} />
             </Link>
