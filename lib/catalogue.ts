@@ -16,6 +16,7 @@ export type StoreProduct = {
   reviewCount?: number;
   inStock: boolean;
   shortDescription?: string;
+  specifications?: { name: string; value: string; group?: string }[];
 };
 
 function formatProduct(product: {
@@ -28,6 +29,7 @@ function formatProduct(product: {
   shortDescription: string | null;
   brand: { name: string };
   images: { url: string }[];
+  specifications?: { key: string; value: string; group: string | null }[];
 }): StoreProduct {
   return {
     id: product.id,
@@ -39,6 +41,7 @@ function formatProduct(product: {
     image: product.images[0]?.url || "/brand/product-placeholder.svg",
     inStock: product.inStock,
     shortDescription: product.shortDescription || undefined,
+    specifications: product.specifications?.map((item) => ({ name: item.key, value: item.value, group: item.group || undefined })),
   };
 }
 
@@ -53,7 +56,7 @@ export async function getStoreProducts(options: { categorySlug?: string; feature
       },
       orderBy: [{ featured: "desc" }, { updatedAt: "desc" }],
       take: options.take || 60,
-      include: { brand: { select: { name: true } }, images: { orderBy: { order: "asc" }, take: 1 } },
+      include: { brand: { select: { name: true } }, images: { orderBy: { order: "asc" }, take: 1 }, specifications: { orderBy: { order: "asc" } } },
     });
     return products.map(formatProduct);
   } catch {

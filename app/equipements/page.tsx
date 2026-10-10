@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, Package } from "lucide-react";
-import { ProductCard } from "@/components/product-card";
-import { ScrollReveal, StaggerItem, StaggerWrapper } from "@/lib/animations";
+import { CatalogueBrowser } from "@/components/catalogue-browser";
+import { ScrollReveal } from "@/lib/animations";
 import { getStoreProducts } from "@/lib/catalogue";
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function EquipementsPage() {
-  const products = (await getStoreProducts({ categorySlug: "equipements" })) ?? [];
+  const products = await getStoreProducts({ categorySlug: "equipements", take: 200 });
 
   return (
     <main className="min-h-screen bg-[#faf9f6] text-[#17201e]">
@@ -41,15 +41,7 @@ export default async function EquipementsPage() {
         </section>
       </ScrollReveal>
       <section className="mx-auto max-w-[1400px] px-5 py-10 sm:px-8 lg:px-14 lg:py-14">
-        {products.length ? (
-          <StaggerWrapper className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {products.map((product) => (
-              <StaggerItem key={product.id}><ProductCard {...product} /></StaggerItem>
-            ))}
-          </StaggerWrapper>
-        ) : (
-          <p className="rounded-2xl border border-[#e4e4dc] bg-white p-8 text-sm text-[#68716a]">Aucun équipement n’est disponible pour le moment.</p>
-        )}
+        <CatalogueBrowser products={products} emptyMessage="Aucun équipement ne correspond à ces filtres." />
       </section>
     </main>
   );

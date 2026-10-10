@@ -31,8 +31,8 @@ const testimonials = [
 ];
 
 export default async function HomePage() {
-  const liveProducts = await getStoreProducts({ featured: true, take: 4 });
-  const displayProducts = liveProducts ?? [];
+  const liveProducts = await getStoreProducts({ categorySlug: "ordinateurs-portables", take: 200 });
+  const displayProducts = [...liveProducts].sort((a, b) => a.price - b.price).slice(0, 10);
 
   return (
     <div className="overflow-hidden bg-[#faf9f6] text-[#17201e]">
@@ -130,7 +130,7 @@ export default async function HomePage() {
             <div className="mb-9 flex items-end justify-between gap-4 sm:mb-12">
               <div>
                 <span className="eyebrow">SÉLECTION ZINK TECH</span>
-                <h2 className="section-title mt-3">Pensés pour vos journées.</h2>
+                <h2 className="section-title mt-3">Les 10 ordinateurs les moins chers.</h2>
                 <p className="mt-3 max-w-lg text-sm leading-6 text-[#666f68]">
                   Des ordinateurs fiables pour avancer sereinement, au bureau, en cours ou à la maison.
                 </p>
@@ -144,7 +144,7 @@ export default async function HomePage() {
             </div>
 
             {displayProducts.length ? (
-              <StaggerWrapper className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <StaggerWrapper className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {displayProducts.map((product) => (
                   <StaggerItem key={product.id}>
                     <ProductCard {...product} />
