@@ -17,7 +17,7 @@ export function CatalogueBrowser({ products, computerFilters = false, emptyMessa
   const [maxPrice, setMaxPrice] = useState("");
   const [processor, setProcessor] = useState<string[]>([]);
   const [ram, setRam] = useState<string[]>([]);
-  const [sort, setSort] = useState("recent");
+  const [sort, setSort] = useState("price-asc");
   const brands = useMemo(() => [...new Set(products.map((product) => product.brand))].sort((a, b) => a.localeCompare(b, "fr")), [products]);
   const filtered = useMemo(() => {
     const terms = normalize(query).split(/\s+/).filter(Boolean);
@@ -44,7 +44,7 @@ export function CatalogueBrowser({ products, computerFilters = false, emptyMessa
   }
 
   function reset() {
-    setQuery(""); setBrand("Toutes les marques"); setMinPrice(""); setMaxPrice(""); setProcessor([]); setRam([]); setSort("recent");
+    setQuery(""); setBrand("Toutes les marques"); setMinPrice(""); setMaxPrice(""); setProcessor([]); setRam([]); setSort("price-asc");
   }
 
   return (
@@ -69,7 +69,7 @@ export function CatalogueBrowser({ products, computerFilters = false, emptyMessa
       </div>
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm text-[#68716a]">{filtered.length} produit{filtered.length === 1 ? "" : "s"} trouvé{filtered.length === 1 ? "" : "s"}</p>
-        <div className="flex items-center gap-3"><button type="button" onClick={reset} className="text-xs font-medium text-[#34705e] underline underline-offset-4">Effacer les filtres</button><label className="sr-only" htmlFor="catalogue-sort">Trier les produits</label><select id="catalogue-sort" value={sort} onChange={(event) => setSort(event.target.value)} className="h-10 rounded-xl border border-[#e1e4dc] bg-white px-3 text-xs"><option value="recent">Ordre actuel</option><option value="price-asc">Prix croissant</option><option value="price-desc">Prix décroissant</option><option value="name">Nom A à Z</option></select></div>
+        <div className="flex items-center gap-3"><button type="button" onClick={reset} className="text-xs font-medium text-[#34705e] underline underline-offset-4">Effacer les filtres</button><label className="sr-only" htmlFor="catalogue-sort">Trier les produits</label><select id="catalogue-sort" value={sort} onChange={(event) => setSort(event.target.value)} className="h-10 rounded-xl border border-[#e1e4dc] bg-white px-3 text-xs"><option value="price-asc">Prix croissant</option><option value="price-desc">Prix décroissant</option><option value="name">Nom A à Z</option><option value="recent">Ordre actuel</option></select></div>
       </div>
       {filtered.length ? <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">{filtered.map((product) => <ProductCard key={product.id} {...product} />)}</div> : <p className="mt-5 rounded-2xl border border-[#e4e4dc] bg-white p-8 text-sm text-[#68716a]">{emptyMessage}</p>}
     </div>
