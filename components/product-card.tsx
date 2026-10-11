@@ -45,10 +45,10 @@ export function ProductCard({
       viewport={{ once: true, margin: "-40px 0px" }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -6 }}
-      className="group product-card-shell"
+      className="group"
     >
       <motion.div
-        className="product-card-surface relative overflow-hidden rounded-2xl border border-[#e4e4dc] bg-white transition-all duration-300"
+        className="relative overflow-hidden rounded-2xl border border-[#e4e4dc] bg-white transition-all duration-300"
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
       >
         {/* ── Image Container ── */}
