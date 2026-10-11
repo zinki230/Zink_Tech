@@ -48,6 +48,19 @@ export function HeroSection() {
       {/* ── Grid Pattern ── */}
       <div className="absolute inset-0 -z-5 grid-pattern opacity-40" />
 
+      {/* ── Lightweight CSS 3D showcase ── */}
+      <div className="hero-3d-stage" aria-hidden="true">
+        <div className="hero-3d-orbit hero-3d-orbit-a" />
+        <div className="hero-3d-orbit hero-3d-orbit-b" />
+        <div className="hero-3d-device">
+          <div className="hero-3d-screen"><span /><i /><i /><i /></div>
+          <div className="hero-3d-base" />
+        </div>
+        <div className="hero-3d-chip">Z<span>TECH</span></div>
+        <span className="hero-3d-spark hero-3d-spark-a" />
+        <span className="hero-3d-spark hero-3d-spark-b" />
+      </div>
+
       {/* ── Content ── */}
       <motion.div style={{ y }} className="relative z-10">
         <div className="mx-auto flex min-h-[650px] max-w-[1400px] flex-col justify-center px-5 pb-16 pt-20 sm:px-8 lg:min-h-[700px] lg:px-14">
